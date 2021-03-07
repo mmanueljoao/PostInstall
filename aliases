@@ -1,0 +1,58 @@
+#	Aliases
+##	Open and update source
+alias aliases='editor ~/.bash_aliases && source ~/.bash_aliases'
+alias aliases.source='source ~/.bash_aliases'
+
+## Manage Packages and System
+alias update='sudo apt update'
+alias list='sudo apt list --upgradable'
+alias upgrade='sudo apt -y upgrade'
+alias install='sudo apt -y install'
+alias remove='sudo apt remove'
+alias autoremove='sudo apt -y autoremove'
+
+##	Manage Files and Folders
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -I'
+alias mkdir='mkdir -pv'
+alias ..='cd ..'
+alias ..l='cd .. && l'
+
+##	ls aliases
+alias llong='exa --long --header'
+alias la='exa --all'
+alias lall='exa --all --long --header'
+alias ldir='exa --all --only-dirs --sort name --oneline'
+alias l='exa'
+
+##	Other
+alias mount='mount | column -t'
+alias su='sudo su'
+alias e='exit'
+alias myip="curl ifconfig.me; echo"
+
+
+##	Rust things
+alias bat='batcat'
+alias cat='batcat'
+alias grep='rg'
+alias fd='fdfind --hidden --no-ignore --max-depth 2' 
+alias ps='procs'
+#	Functions
+##	mkdir and cd into vim
+mkcd() {
+	mkdir "$1"
+	cd "$1"
+}
+
+sysupdate() {
+	echo "Updating System..."
+	sudo apt update 2>/dev/null | grep packages | cut -d '.' -f 1
+	# sudo apt list --upgradable
+	sudo apt -y upgrade &>/dev/null
+	sudo apt -y autoremove 2>/dev/null | grep upgraded | cut -d '.' -f 1
+	echo "Update Complete"
+}
+
+
