@@ -59,7 +59,7 @@ sudo apt install -y zsh && echo " Completed"
 printf "Changing User Shell ..."
 usermod --shell /bin/zsh $USERNAME && echo " Completed"
 echo "Installing OH-MY-ZSH ..."
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo " Completed"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && echo " Completed"
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
