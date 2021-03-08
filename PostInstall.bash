@@ -65,14 +65,14 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-
 cp ./zshrc $HOME/.zshrc
 echo
 
-# Creating .aliases
+# Creating .bash_aliases
 
-echo "One more thing - here is your NEW ~/.aliases"
-ALIASES="$HOME/.aliases"
+echo "One more thing - here is your NEW ~/.bash_aliases"
+ALIASES="$HOME/.bash_aliases"
 
 echo
 if [ -f "$ALIASES" ]; then
-	printf "    ~/.aliases already exists. Moving to ~/.aliases.bak\n"
+	printf "    ~/.bash_aliases already exists. Moving to ~/.bash_aliases.bak\n"
 	mv $ALIASES $ALIASES.bak
 fi
 
@@ -80,7 +80,7 @@ touch $ALIASES
 echo
 cp ./aliases $ALIASES
 source $ALIASES
-echo -e "    Check your new ~/.aliases at $ALIASES.\t"
+echo -e "    Check your new ~/.bash_aliases at $ALIASES.\t"
 echo
 
 # Starship - Cross Shell Prompt
