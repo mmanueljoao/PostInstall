@@ -8,6 +8,7 @@ read -r USERNAME
 HOME="/home/$USERNAME/"
 
 select-editor
+echo
 
 # ensure that OS is updated
 echo "Updating System..."
@@ -16,6 +17,7 @@ sudo apt update &>/dev/null && sudo apt list --upgradable && sudo apt -y full-up
 # add repositories
 
 # apt install
+echo
 printf "Installing needed packages... "
 sudo apt install -y vim curl git &>/dev/null
 
@@ -49,15 +51,15 @@ echo
 
 echo "Current IP Address:"
 printf "    " && curl ifconfig.me
-echo
+echo && echo
 
 # Installing ZSH
 printf "Installing ZSH ..."
-sudo apt install -y zsh &>/dev/null && echo " Completed"
+sudo apt install -y zsh && echo " Completed"
 printf "Changing User Shell ..."
-usermod --shell /bin/zsh $USERNAME &>/dev/null && echo " Completed"
-printf "Installing OH-MY-ZSH ..."
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &>/dev/null && echo " Completed"
+usermod --shell /bin/zsh $USERNAME && echo " Completed"
+echo "Installing OH-MY-ZSH ..."
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo " Completed"
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
