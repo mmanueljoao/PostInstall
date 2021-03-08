@@ -5,7 +5,7 @@ clear
 echo -e "Just a few parameters before we proceed.\n"
 printf 'Enter your Username: '
 read -r USERNAME
-HOME="/home/$USERNAME/"
+HOME="/home/$USERNAME"
 
 select-editor
 echo
@@ -59,7 +59,7 @@ sudo apt install -y zsh && echo " Completed"
 printf "Changing User Shell ..."
 usermod --shell /bin/zsh $USERNAME && echo " Completed"
 echo "Installing OH-MY-ZSH ..."
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo " Completed"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && echo " Completed"
 
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions &>/dev/null
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting &>/dev/null
@@ -75,7 +75,7 @@ ALIASES="$HOME/.aliases"
 echo
 if [ -f "$ALIASES" ]; then
 	printf "    ~/.aliases already exists. Moving to ~/.aliases.bak\n"
-	mv $ALIASES $ALIASES.bak
+	sudo mv $ALIASES $ALIASES.bak
 fi
 
 touch $ALIASES
@@ -88,13 +88,13 @@ echo
 # Starship - Cross Shell Prompt
 echo "Preparing for take-off - https://starship.rs/"
 printf "Installing Starship ..."
-curl -fsSL https://starship.rs/install.sh | bash &>/dev/null
+curl -fsSL https://starship.rs/install.sh -y | bash &>/dev/null
 
-mkdir -m $HOME/.config &
+mkdir $HOME/.config
 echo ./starship >$HOME/.config/starship.toml && echo " Completed"
 
 printf "De-Rusting utilities ..."
-sudo apt install -y cargo exa bat ripgrep fd-find &>/dev/null
+sudo apt install -y cargo exa bat ripgrep fd-find
 cargo install procs && ln -s $HOME/.cargo/bin/procs /usr/local/bin && echo " Completed"
 
 echo "Post Install Script is finished."
