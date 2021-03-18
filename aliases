@@ -21,9 +21,11 @@ alias ..l='cd .. && l'
 
 ##	ls aliases
 alias llong='exa --long --header'
+alias ll='llong'
 alias la='exa --all'
 alias lall='exa --all --long --header'
-alias ldir='exa --all --only-dirs --sort name --oneline'
+alias ldir='exa --only-dirs --sort name --oneline'
+alias lldir='exa --all --only-dirs --sort name --oneline'
 alias l='exa'
 
 ##	Other
