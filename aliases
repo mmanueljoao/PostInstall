@@ -41,6 +41,7 @@ alias cat='batcat'
 alias grep='rg'
 alias fd='fdfind --hidden --no-ignore --max-depth 2' 
 alias ps='procs'
+
 #	Functions
 ##	mkdir and cd into vim
 mkcd() {
@@ -50,10 +51,10 @@ mkcd() {
 
 sysupdate() {
 	echo "Updating System..."
-	sudo apt update 2>/dev/null | grep packages | cut -d '.' -f 1
-	# sudo apt list --upgradable
-	sudo apt -y upgrade &>/dev/null
-	sudo apt -y autoremove 2>/dev/null | grep upgraded | cut -d '.' -f 1
+	sudo apt update &>/dev/null
+	sudo apt list --upgradable
+	sudo apt -y upgrade &>/dev/null | grep --color never upgraded
+	sudo apt -y autoremove &>/dev/null 
 	echo "Update Complete"
 }
 
