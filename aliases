@@ -34,12 +34,11 @@ alias su='sudo su'
 alias e='exit'
 alias myip="curl ifconfig.me; echo"
 
-
 ##	Rust things
 alias bat='batcat'
 alias cat='batcat'
 alias grep='rg'
-alias fd='fdfind --hidden --no-ignore --max-depth 2' 
+alias fd='fdfind --hidden --no-ignore --max-depth 2'
 alias ps='procs'
 
 #	Functions
@@ -54,8 +53,18 @@ sysupdate() {
 	sudo apt update &>/dev/null
 	sudo apt list --upgradable
 	sudo apt -y upgrade &>/dev/null | grep --color never upgraded
-	sudo apt -y autoremove &>/dev/null 
+	sudo apt -y autoremove &>/dev/null
 	echo "Update Complete"
 }
 
+lpath() {
+	echo $PATH | sed 's_:_\n_g'
+}
 
+AWrite() {
+	sudo chmod a+rwx "$1"
+}
+
+DWrite() {
+	sudo chmod -R 0444 "$1"
+}

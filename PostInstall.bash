@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Initializing
-script ./output.log
 clear
 echo -e "Just a few parameters before we proceed.\n"
 printf 'Enter your Username: '
@@ -95,6 +94,6 @@ cp ./starship $HOME/.config/starship.toml && echo " Completed"
 
 printf "Rusting core-utils ..."
 sudo apt install -y exa bat ripgrep fd-find
-cargo install procs && sudo ln -s $HOME/.cargo/bin/procs /usr/local/bin && echo " Completed"
+cargo install procs && sudo ln -s $HOME/.cargo/bin/procs $HOME/.local/bin && echo " Completed"
 
 echo "Post Install Script is finished."
