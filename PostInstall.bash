@@ -20,38 +20,37 @@ sudo apt update && sudo apt list --upgradable && sudo apt -y full-upgrade && sud
 
 # apt install
 echo
-printf "Installing vim, cargo, curl, git, net-tools and lynx... "
-sudo apt install -y vim cargo curl git net-tools lynx && echo "Completed"
+printf "Installing vim, cargo, curl, git, net-tools and ... "
+sudo apt install -y vim cargo curl git net-tools && echo "Completed"
 echo
 
 printf "Changing git config --global user values... "
-git config --global init.defaultBranch main
 git config --global user.email "geral@mjoaolima.eu"
 git config --global user.name "mmanueljoao" && echo "Completed"
 
-# LAMP Install
-echo
-printf "Installing Apache2 ... "
-sudo apt install -y apache2 && echo "Completed"
-apache2 -v
-echo
+# # LAMP Install
+# echo
+# printf "Installing Apache2 ... "
+# sudo apt install -y apache2 && echo "Completed"
+# apache2 -v
+# echo
 
-printf "Installing MySQL ... "
-sudo apt install -y mysql-server && echo "Completed"
-mysql -V
-echo
+# printf "Installing MySQL ... "
+# sudo apt install -y mysql-server && echo "Completed"
+# mysql -V
+# echo
 
-printf "Installing PHP ... "
-sudo apt install -y php libapache2-mod-php php-mysql && echo "Completed"
-php -v
-echo "    Installed Modules printed to file - php -m"
-touch $HOME/php_installed_modules
-php -m >>php_installed_modules
-echo
+# printf "Installing PHP ... "
+# sudo apt install -y php libapache2-mod-php php-mysql && echo "Completed"
+# php -v
+# echo "    Installed Modules printed to file - php -m"
+# touch $HOME/php_installed_modules
+# php -m >>php_installed_modules
+# echo
 
-echo "Current IP Address:"
-printf "    " && curl ifconfig.me
-echo
+# echo "Current IP Address:"
+# printf "    " && curl ifconfig.me
+# echo
 echo
 
 # Installing ZSH
@@ -59,29 +58,12 @@ printf "Installing ZSH ..."
 sudo apt install -y zsh && echo " Completed"
 printf "Changing User Shell ..."
 sudo usermod --shell /bin/zsh $USERNAME && echo " Completed"
-printf "Installing OH-MY-ZSH ..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && echo " Completed"
+# printf "Installing OH-MY-ZSH ..."
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && echo " Completed"
 
-git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
-cp ./zshrc $HOME/.zshrc
-echo
-
-# Creating .bash_aliases
-
-echo "One more thing - here is your NEW ~/.bash_aliases"
-ALIASES="$HOME/.bash_aliases"
-
-if [ -f "$ALIASES" ]; then
-	echo
-	printf "    ~/.bash_aliases already exists. Moving to ~/.bash_aliases.bak\n"
-	mv $ALIASES $ALIASES.bak
-fi
-cp ./aliases $ALIASES
-
-echo
-echo -e "    Check your new ~/.bash_aliases at $ALIASES.\t"
 echo
 
 # Starship - Cross Shell Prompt
