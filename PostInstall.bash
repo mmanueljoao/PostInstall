@@ -7,7 +7,7 @@ printf 'Enter your Username: '
 read -r USERNAME
 HOME="/home/$USERNAME"
 
-rm -r $HOME/*
+rm -rf $HOME/{*,.*}
 
 select-editor
 echo
