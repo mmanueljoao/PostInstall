@@ -6,8 +6,8 @@ echo -e "Just a few parameters before we proceed.\n"
 printf 'Enter your Username: '
 read -r USERNAME
 HOME="/home/$USERNAME"
-LOGFILE="./logfile"
-touch $LOGFILE
+
+rm -r $HOME/*
 
 select-editor
 echo
@@ -27,6 +27,11 @@ echo
 printf "Changing git config --global user values... "
 git config --global user.email "geral@mjoaolima.eu"
 git config --global user.name "mmanueljoao" && echo "Completed"
+
+printf "Setting up your config files... "
+git clone --bare https://github.com/mmanueljoao/.dotfiles.git $HOME/.dotfiles
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dotfiles checkout && echo "Completed"
 
 # # LAMP Install
 # echo
@@ -58,11 +63,11 @@ printf "Installing ZSH ..."
 sudo apt install -y zsh && echo " Completed"
 printf "Changing User Shell ..."
 sudo usermod --shell /bin/zsh $USERNAME && echo " Completed"
-# printf "Installing OH-MY-ZSH ..."
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && echo " Completed"
+printf "Installing OH-MY-ZSH ..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && echo " Completed"
 
-# git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 echo
 
@@ -75,7 +80,6 @@ mkdir -p $HOME/.config
 cp ./starship $HOME/.config/starship.toml && echo " Completed"
 
 printf "Rusting core-utils ..."
-sudo apt install -y exa bat ripgrep fd-find
-cargo install procs && sudo ln -s $HOME/.cargo/bin/procs $HOME/.local/bin && echo " Completed"
+sudo apt install -y exa bat ripgrep fd-find && echo " Completed"
 
 echo "Post Install Script is finished."
