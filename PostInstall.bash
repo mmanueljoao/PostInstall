@@ -7,31 +7,25 @@ printf 'Enter your Username: '
 read -r USERNAME
 HOME="/home/$USERNAME"
 
-rm -rf $HOME/{*,.*}
-
-select-editor
 echo
+
+# add repositories
+## Official PPA by git
+sudo add-apt-repository -y ppa:git-core/ppa
 
 # ensure that OS is updated
 echo "Updating System..."
 sudo apt update && sudo apt list --upgradable && sudo apt -y full-upgrade && sudo apt -y autoremove && sudo apt -y autoclean && echo "Update Complete"
 
-# add repositories
-
 # apt install
 echo
-printf "Installing vim, cargo, curl, git, net-tools and ... "
-sudo apt install -y vim cargo curl git net-tools && echo "Completed"
+printf "Installing vim, cargo, curl, git, {net,wireless}-tools and ... "
+sudo apt install -y vim cargo curl git net-tools wireless-tools && echo "Completed"
 echo
 
-printf "Changing git config --global user values... "
-git config --global user.email "geral@mjoaolima.eu"
-git config --global user.name "mmanueljoao" && echo "Completed"
-
-printf "Setting up your config files... "
-git clone --bare https://github.com/mmanueljoao/.dotfiles.git $HOME/.dotfiles
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-dotfiles checkout && echo "Completed"
+printf "Setting WHO AM I for git ... "
+git config --global init.defaultBranch main
+git config --global user.email "geral@mjoaolima.eu" && git config --global user.name "mmanueljoao" && echo "Completed"
 
 # # LAMP Install
 # echo
@@ -58,6 +52,14 @@ dotfiles checkout && echo "Completed"
 # echo
 echo
 
+printf "Setting up your config files... "
+## This DELETES ALL FILES in HOME
+rm -rf $HOME/{*,.*}
+
+git clone --bare https://github.com/mmanueljoao/.dotfiles.git $HOME/.dotfiles
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout 
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push --set-upstream origin main&& echo "Completed"
+
 # Installing ZSH
 printf "Installing ZSH ..."
 sudo apt install -y zsh && echo " Completed"
@@ -69,6 +71,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
+## Instalation of zsh WITH oh-my-zsh moves files from the *dotfiles* repo. This is a necessary corrections.
+mv .zshrc.pre-oh-my-zsh .zshrc
 echo
 
 # Starship - Cross Shell Prompt
@@ -77,9 +81,11 @@ printf "Installing Starship ..."
 curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
 
 mkdir -p $HOME/.config
-cp ./starship $HOME/.config/starship.toml && echo " Completed"
+# cp ./starship $HOME/.config/starship.toml && 
+echo " Completed"
 
 printf "Rusting core-utils ..."
 sudo apt install -y exa bat ripgrep fd-find && echo " Completed"
+
 
 echo "Post Install Script is finished."
