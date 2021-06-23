@@ -50,12 +50,14 @@ printf "Setting up your config files... "
 rm -rf $HOME/{*,.*}
 
 git clone --bare https://github.com/mmanueljoao/.dotfiles.git $HOME/.dotfiles
+
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout 
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config status.showUntrackedFiles no
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push --set-upstream origin main&& echo "Completed"
 
 printf "Setting WHO AM I for git ... "
 git config --global init.defaultBranch main
-git config --global user.email "geral@mjoaolima.eu" && git config --global user.name "mmanueljoao" && echo "Completed"
+git config --global user.email "mmanueljoao@outlook.pt" && git config --global user.name "mmanueljoao" && echo "Completed"
 
 # Installing ZSH
 printf "Installing ZSH ..."
@@ -71,6 +73,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-
 ## Instalation of zsh WITH oh-my-zsh moves files from the *dotfiles* repo. This is a necessary corrections.
 mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
 echo
+# Installing font 
+sudo cp -r ./FiraCode/. /usr/local/share/fonts/FiraCode
 
 # Starship - Cross Shell Prompt
 echo "Preparing for take-off - https://starship.rs/"
