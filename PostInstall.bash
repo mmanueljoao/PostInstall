@@ -15,7 +15,7 @@ sudo add-apt-repository -y ppa:git-core/ppa
 
 # ensure that OS is updated
 echo "Updating System..."
-sudo apt update && sudo apt list --upgradable && sudo apt -y full-upgrade && sudo apt -y autoremove && sudo apt -y autoclean && echo "Update Complete"
+sudo apt update && sudo apt -y full-upgrade && sudo apt -y autoremove && sudo apt -y autoclean && echo "Update Complete"
 
 # apt install
 echo
@@ -49,7 +49,7 @@ printf "Setting up your config files... "
 ## This DELETES ALL FILES in HOME
 rm -rf $HOME/{*,.*}
 
-git clone --bare https://github.com/mmanueljoao/.dotfiles.git $HOME/.dotfiles
+git clone --bare https://github.com/mmanueljoao/dotfiles.git $HOME/.dotfiles
 
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout 
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config status.showUntrackedFiles no
